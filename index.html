@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🚗 香港車友出車盲盒 - 柔和版</title>
+    <title>🚗 香港車友出車盲盒 - 直開高德App版</title>
     <style>
         :root {
             /* 柔和莫蘭迪配色系統 */
-            --bg-dark: #1E232E;       /* 柔和午夜灰藍 */
-            --bg-card: #2A3143;       /* 柔和卡片底色 */
-            --primary: #82A0D8;       /* 柔和粉藍色 (代替刺眼螢光藍) */
+            --bg-dark: #1E232E;       
+            --bg-card: #2A3143;       
+            --primary: #82A0D8;       
             --primary-glow: rgba(130, 160, 216, 0.25);
-            --text-main: #E2E8F0;     /* 柔和白 */
-            --text-muted: #94A3B8;    /* 淺灰字體 */
+            --text-main: #E2E8F0;     
+            --text-muted: #94A3B8;    
             --tag-bg: rgba(130, 160, 216, 0.15);
-            --nav-btn-bg: #5D8A66;    /* 柔和莫蘭迪綠 (高德導航掣) */
+            --nav-btn-bg: #5D8A66;    
         }
 
         body {
@@ -53,7 +53,6 @@
             margin: 0;
         }
 
-        /* 虛擬地圖雷達卡片 */
         .map-card {
             background: var(--bg-card);
             border-radius: 20px;
@@ -124,7 +123,6 @@
             font-weight: 500;
         }
 
-        /* 巨大決定按鈕 (柔和漸變) */
         .roll-btn {
             background: linear-gradient(135deg, #82A0D8 0%, #6883B6 100%);
             color: #111827;
@@ -140,7 +138,6 @@
         }
         .roll-btn:active { transform: scale(0.97); }
 
-        /* 導航按鈕 (柔和綠) */
         .nav-btn {
             background: var(--nav-btn-bg);
             color: #fff;
@@ -158,7 +155,6 @@
             margin-top: 8px;
         }
 
-        /* 歷史記錄卡片 */
         .history-card {
             background: var(--bg-card);
             border-radius: 14px;
@@ -179,10 +175,9 @@
 <div class="container">
     <div class="header">
         <h2>🚗 香港車友出車盲盒</h2>
-        <p>20個免禁區勝地，一鍵高德地圖導航</p>
+        <p>20個免禁區勝地，直開高德地圖 App</p>
     </div>
 
-    <!-- 地圖盲盒展示卡片 -->
     <div class="map-card" id="mapCard">
         <div class="radar-circle">
             <div class="radar-icon" id="destIcon">🗺️</div>
@@ -193,13 +188,11 @@
         <h3 class="destination-title" id="destTitle">準備出車</h3>
         <p class="destination-desc" id="destDesc">點擊下方按鈕，隨機抽中香港開車勝地！</p>
         
-        <a id="navLink" href="#" class="nav-btn" style="display: none;" target="_blank">🗺️ 一鍵跳轉高德地圖導航</a>
+        <a id="navLink" href="#" class="nav-btn" style="display: none;">🗺️ 開啟高德地圖導航</a>
     </div>
 
-    <!-- 隨機決定按鈕 (今次包保㩒得郁！) -->
     <button class="roll-btn" onclick="rollDestination()">🎲 隨機決定！去邊度好？</button>
 
-    <!-- 歷史抽中記錄 -->
     <div class="history-card">
         <h4>📜 最近抽中記錄</h4>
         <div id="historyList" style="color: var(--text-muted); font-size: 13px;">暫無記錄</div>
@@ -207,7 +200,7 @@
 </div>
 
 <script>
-    // 20個香港經典免禁區車友出車景點資料庫（已剔除馬灣，加入浩和街與昂船洲）
+    // 20個香港經典免禁區車友出車景點資料庫
     const destinations = [
         { name: "石澳道 (Shek O)", icon: "🌊", tags: ["多彎過癮", "海景", "深夜一流"], desc: "港島經典駕駛聖地，連續彎道極具駕駛樂趣。", keyword: "石澳道" },
         { name: "大帽山道 (Tai Mo Shan)", icon: "☁️", tags: ["全港最高", "睇夜景", "多霧注意"], desc: "香港最高峰路段，荃錦公路多彎，可俯瞰全港夜景。", keyword: "大帽山道" },
@@ -233,7 +226,6 @@
 
     let history = [];
 
-    // 核心隨機抽籤功能 (今次絕對齊全！)
     function rollDestination() {
         const titleEl = document.getElementById('destTitle');
         const descEl = document.getElementById('destDesc');
@@ -242,19 +234,16 @@
         const navBtn = document.getElementById('navLink');
         const historyEl = document.getElementById('historyList');
 
-        // 按下時的過場狀態
         titleEl.innerText = "🎲 雷達搜尋中...";
         descEl.innerText = "正在為你篩選今晚最佳路線...";
         iconEl.innerText = "🔄";
         tagsEl.innerHTML = '<span class="tag" style="background:transparent;">...</span>';
         navBtn.style.display = "none";
 
-        // 模擬搜尋延遲 600 毫秒
         setTimeout(() => {
             const randomIndex = Math.floor(Math.random() * destinations.length);
             const dest = destinations[randomIndex];
 
-            // 更新畫面內容
             iconEl.innerText = dest.icon;
             titleEl.innerText = dest.name;
             descEl.innerText = dest.desc;
@@ -264,11 +253,13 @@
                 tagsEl.innerHTML += `<span class="tag">${tag}</span>`;
             });
 
-            // 設定高德地圖專屬 URL Scheme
-            navBtn.href = `https://uri.amap.com/search?keyword=${encodeURIComponent(dest.keyword)}&src=mypage&coordinate=gaode`;
+            // 核心修改：使用 iOS 高德原生 URL Scheme (iosamap://)
+            // path 代表路線規劃，dname 代表目的地，t=0 代表駕車模式
+            navBtn.href = `iosamap://path?sourceApplication=HKDriveBox&dname=${encodeURIComponent(dest.keyword)}&t=0`;
             navBtn.style.display = "inline-block";
 
-            // 記錄歷史 (只顯示最近 3 次)
+            // 如果喺 Safari 㩒，佢會彈句「要在高德地圖中打開嗎？」，按打開就直接入 App！
+            
             if (!history.includes(dest.name)) {
                 history.unshift(dest.name);
                 if (history.length > 3) history.pop();
