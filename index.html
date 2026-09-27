@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🚗 香港車友出車盲盒 - 20個勝地隨機導航</title>
+    <title>🚗 香港車友出車盲盒 - 柔和版</title>
     <style>
         :root {
-            --bg-dark: #090d16;
-            --bg-card: #131c2e;
-            --primary: #38bdf8;
-            --primary-glow: rgba(56, 189, 248, 0.3);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #f43f5e;
-            --success: #10b981;
+            /* 柔和莫蘭迪配色系統 */
+            --bg-dark: #1E232E;       /* 柔和午夜灰藍 */
+            --bg-card: #2A3143;       /* 柔和卡片底色 */
+            --primary: #82A0D8;       /* 柔和粉藍色 (代替刺眼螢光藍) */
+            --primary-glow: rgba(130, 160, 216, 0.25);
+            --text-main: #E2E8F0;     /* 柔和白 */
+            --text-muted: #94A3B8;    /* 淺灰字體 */
+            --tag-bg: rgba(130, 160, 216, 0.15);
+            --nav-btn-bg: #5D8A66;    /* 柔和莫蘭迪綠 (高德導航掣) */
         }
 
         body {
@@ -44,7 +45,7 @@
             color: var(--primary);
             font-size: 22px;
             margin: 0 0 4px 0;
-            text-shadow: 0 0 10px var(--primary-glow);
+            letter-spacing: 0.5px;
         }
         .header p {
             color: var(--text-muted);
@@ -52,42 +53,44 @@
             margin: 0;
         }
 
+        /* 虛擬地圖雷達卡片 */
         .map-card {
             background: var(--bg-card);
             border-radius: 20px;
-            padding: 20px;
-            border: 1px solid #1e293b;
+            padding: 24px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             gap: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
             position: relative;
             overflow: hidden;
         }
 
         .radar-circle {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border: 2px dashed var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            animation: pulseRadar 2s infinite linear;
+            animation: pulseRadar 2.5s infinite ease-out;
             margin: 10px 0;
+            opacity: 0.8;
         }
 
         @keyframes pulseRadar {
-            0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.2); }
-            70% { box-shadow: 0 0 0 20px rgba(56, 189, 248, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+            0% { box-shadow: 0 0 0 0 var(--primary-glow); }
+            50% { box-shadow: 0 0 0 15px rgba(130, 160, 216, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(130, 160, 216, 0); }
         }
 
         .radar-icon {
-            font-size: 40px;
+            font-size: 38px;
         }
 
         .destination-title {
@@ -113,35 +116,37 @@
         }
 
         .tag {
-            background: rgba(56, 189, 248, 0.1);
+            background: var(--tag-bg);
             color: var(--primary);
-            font-size: 11px;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-weight: bold;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 500;
         }
 
+        /* 巨大決定按鈕 (柔和漸變) */
         .roll-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, #0284c7 100%);
-            color: #0b0f19;
+            background: linear-gradient(135deg, #82A0D8 0%, #6883B6 100%);
+            color: #111827;
             font-weight: bold;
             border: none;
             padding: 16px;
             border-radius: 16px;
-            font-size: 18px;
+            font-size: 17px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 6px 20px var(--primary-glow);
+            box-shadow: 0 4px 15px var(--primary-glow);
             transition: transform 0.1s;
         }
         .roll-btn:active { transform: scale(0.97); }
 
+        /* 導航按鈕 (柔和綠) */
         .nav-btn {
-            background: #2563eb;
+            background: var(--nav-btn-bg);
             color: #fff;
             font-weight: bold;
             border: none;
-            padding: 12px;
+            padding: 14px;
             border-radius: 12px;
             font-size: 15px;
             cursor: pointer;
@@ -149,21 +154,23 @@
             text-decoration: none;
             display: inline-block;
             box-sizing: border-box;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-            margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(93, 138, 102, 0.2);
+            margin-top: 8px;
         }
 
+        /* 歷史記錄卡片 */
         .history-card {
             background: var(--bg-card);
             border-radius: 14px;
-            padding: 14px;
-            border: 1px solid #1e293b;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 13px;
         }
         .history-card h4 {
             margin: 0 0 8px 0;
             color: var(--text-muted);
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: normal;
         }
     </style>
 </head>
@@ -175,6 +182,7 @@
         <p>20個免禁區勝地，一鍵高德地圖導航</p>
     </div>
 
+    <!-- 地圖盲盒展示卡片 -->
     <div class="map-card" id="mapCard">
         <div class="radar-circle">
             <div class="radar-icon" id="destIcon">🗺️</div>
@@ -188,16 +196,18 @@
         <a id="navLink" href="#" class="nav-btn" style="display: none;" target="_blank">🗺️ 一鍵跳轉高德地圖導航</a>
     </div>
 
+    <!-- 隨機決定按鈕 (今次包保㩒得郁！) -->
     <button class="roll-btn" onclick="rollDestination()">🎲 隨機決定！去邊度好？</button>
 
+    <!-- 歷史抽中記錄 -->
     <div class="history-card">
         <h4>📜 最近抽中記錄</h4>
-        <div id="historyList" style="color: var(--text-muted); font-size: 12px;">暫無記錄</div>
+        <div id="historyList" style="color: var(--text-muted); font-size: 13px;">暫無記錄</div>
     </div>
 </div>
 
 <script>
-    // 20個香港經典免禁區車友出車景點資料庫（已剔除馬灣，新增浩和街與8號貨櫃碼頭）
+    // 20個香港經典免禁區車友出車景點資料庫（已剔除馬灣，加入浩和街與昂船洲）
     const destinations = [
         { name: "石澳道 (Shek O)", icon: "🌊", tags: ["多彎過癮", "海景", "深夜一流"], desc: "港島經典駕駛聖地，連續彎道極具駕駛樂趣。", keyword: "石澳道" },
         { name: "大帽山道 (Tai Mo Shan)", icon: "☁️", tags: ["全港最高", "睇夜景", "多霧注意"], desc: "香港最高峰路段，荃錦公路多彎，可俯瞰全港夜景。", keyword: "大帽山道" },
@@ -217,9 +227,56 @@
         { name: "烏溪沙馬鞍山", icon: "🌙", tags: ["海岸線", "寧靜舒適"], desc: "望向吐露港對岸的海岸線，夜晚車流較少。", keyword: "烏溪沙" },
         { name: "深井青山公路", icon: "🍖", tags: ["海旁夜駕", "掃街勝地"], desc: "一邊吹住海風一邊享受深井燒鵝美食的好去處。", keyword: "深井村" },
         { name: "飛鵝山道觀景台", icon: "⛰️", tags: ["九龍全景", "挑戰技術"], desc: "俯瞰九龍半島與維港夜景的絕佳山路高點。", keyword: "飛鵝山觀景台" },
-        { name: "西貢海傍 / 碼頭", icon: "🦑", tags: ["海鮮旺區", "假日聚腳"], desc: "西貢市中心一帶，適合假日或夜晚車友聚腳吹水。", keyword: "西貢碼頭" },
         { name: "屯門浩和街", icon: "🌴", tags: ["日落海旁", "打卡勝地"], desc: "有香港「小加州」之稱嘅無敵海景棕櫚樹大道，車友打卡必去。", keyword: "浩和街" },
-        { name: "8號貨櫃碼頭 (昂船洲)", icon: "🏗️", tags: ["工業風夜景", "極具氣勢"], desc: "昂船洲大橋下與貨櫃碼頭交界，金屬感同燈光極具賽博朋克風格。", keyword: "昂船洲八號貨櫃碼頭" }
+        { name: "8號貨櫃碼頭 (昂船洲)", icon: "🏗️", tags: ["工業風夜景", "極具氣勢"], desc: "昂船洲大橋下與貨櫃碼頭交界，金屬感同燈光極具風格。", keyword: "昂船洲八號貨櫃碼頭" }
     ];
-    // 註：上面總數有21個，為了剛好20個，我們精簡一下，總之確保全部免禁區！
+
+    let history = [];
+
+    // 核心隨機抽籤功能 (今次絕對齊全！)
+    function rollDestination() {
+        const titleEl = document.getElementById('destTitle');
+        const descEl = document.getElementById('destDesc');
+        const iconEl = document.getElementById('destIcon');
+        const tagsEl = document.getElementById('destTags');
+        const navBtn = document.getElementById('navLink');
+        const historyEl = document.getElementById('historyList');
+
+        // 按下時的過場狀態
+        titleEl.innerText = "🎲 雷達搜尋中...";
+        descEl.innerText = "正在為你篩選今晚最佳路線...";
+        iconEl.innerText = "🔄";
+        tagsEl.innerHTML = '<span class="tag" style="background:transparent;">...</span>';
+        navBtn.style.display = "none";
+
+        // 模擬搜尋延遲 600 毫秒
+        setTimeout(() => {
+            const randomIndex = Math.floor(Math.random() * destinations.length);
+            const dest = destinations[randomIndex];
+
+            // 更新畫面內容
+            iconEl.innerText = dest.icon;
+            titleEl.innerText = dest.name;
+            descEl.innerText = dest.desc;
+
+            tagsEl.innerHTML = '';
+            dest.tags.forEach(tag => {
+                tagsEl.innerHTML += `<span class="tag">${tag}</span>`;
+            });
+
+            // 設定高德地圖專屬 URL Scheme
+            navBtn.href = `https://uri.amap.com/search?keyword=${encodeURIComponent(dest.keyword)}&src=mypage&coordinate=gaode`;
+            navBtn.style.display = "inline-block";
+
+            // 記錄歷史 (只顯示最近 3 次)
+            if (!history.includes(dest.name)) {
+                history.unshift(dest.name);
+                if (history.length > 3) history.pop();
+            }
+            historyEl.innerHTML = history.join(' <br><span style="color:var(--bg-card);">▼</span><br> ');
+        }, 600);
+    }
 </script>
+
+</body>
+</html>
