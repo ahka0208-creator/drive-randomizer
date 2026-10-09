@@ -175,7 +175,7 @@
 <div class="container">
     <div class="header">
         <h2>🚗 香港車友出車盲盒</h2>
-        <p>23個精選遊車河勝地，直開高德地圖 App</p>
+        <p>19個免禁區勝地，直開高德地圖 App</p>
     </div>
 
     <div class="map-card" id="mapCard">
@@ -188,7 +188,8 @@
         <h3 class="destination-title" id="destTitle">準備出車</h3>
         <p class="destination-desc" id="destDesc">點擊下方按鈕，隨機抽中香港開車勝地！</p>
         
-        <a id="navLink" href="#" class="nav-btn" style="display: none;">🗺️ 開啟高德地圖導航</a>
+        <!-- 點擊跳轉的高德按鈕 -->
+        <a id="navLink" href="#" target="_blank" class="nav-btn" style="display: none;">🗺️ 直插高德地圖起步</a>
     </div>
 
     <button class="roll-btn" onclick="rollDestination()">🎲 隨機決定！去邊度好？</button>
@@ -200,36 +201,32 @@
 </div>
 
 <script>
-    // 23個精選 LTE Auto 推薦地點 (已加入全部 GPS 座標，解決多個搜尋結果的問題)
+    // 19個精選 LTE Auto 推薦地點 (已全面替換為高德官方短連結)
     const destinations = [
         // 港島區
-        { name: "天星碼頭多層停車場", icon: "🅿️", tags: ["港島區", "維港海景", "經典打卡"], desc: "中環經典多層停車場，背景係無敵維港海景及摩天輪。", keyword: "中環天星碼頭多層停車場", lat: 22.2831, lon: 114.1616 },
-        { name: "舊總督山頂別墅守衛室", icon: "🏛️", tags: ["港島區", "英倫風", "歷史古蹟"], desc: "山頂充滿古典英倫風味的守衛室，打卡一流。", keyword: "舊總督山頂別墅守衛室", lat: 22.2743, lon: 114.1437 },
-        { name: "司徒拔道觀景臺", icon: "🌃", tags: ["港島區", "極級夜景", "半山"], desc: "飽覽跑馬地及維港壯麗夜景的半山觀景勝地。", keyword: "司徒拔道觀景臺", lat: 22.2687, lon: 114.1751 },
-        { name: "白加道", icon: "⛰️", tags: ["港島區", "山頂纜車", "富豪地段"], desc: "可以捕捉山頂纜車擦身而過的獨特視角。", keyword: "白加道", lat: 22.2709, lon: 114.1537 },
+        { name: "天星碼頭多層停車場", icon: "🅿️", tags: ["港島區", "維港海景", "經典打卡"], desc: "中環經典多層停車場，背景係無敵維港海景及摩天輪。", url: "https://surl.amap.com/2X210syw3VS" },
+        { name: "舊總督山頂別墅守衛室", icon: "🏛️", tags: ["港島區", "英倫風", "歷史古蹟"], desc: "山頂充滿古典英倫風味的守衛室，打卡一流。", url: "https://surl.amap.com/3om0SLox1y7" },
+        { name: "司徒拔道觀景臺", icon: "🌃", tags: ["港島區", "極級夜景", "半山"], desc: "飽覽跑馬地及維港壯麗夜景的半山觀景勝地。", url: "https://surl.amap.com/3dNw082MbrE" },
+        { name: "白加道", icon: "⛰️", tags: ["港島區", "山頂纜車", "富豪地段"], desc: "可以捕捉山頂纜車擦身而過的獨特視角。", url: "https://surl.amap.com/ex6mA4ua2UA" },
 
         // 九龍區
-        { name: "海運大廈停車場", icon: "🚢", tags: ["九龍區", "頂層靚景", "海景日落"], desc: "尖沙咀海港城頂層，盡覽無遮擋維多利亞港日落。", keyword: "海運大廈露天停車場", lat: 22.2961, lon: 114.1666 },
-        { name: "西九文化區藝術公園", icon: "🎨", tags: ["九龍區", "文青打卡", "大草地"], desc: "文化氣息濃厚，海濱長廊與大草地旁吹風散步。", keyword: "西九文化區藝術公園", lat: 22.3013, lon: 114.1578 },
-        { name: "啟德郵輪碼頭公園", icon: "🛳️", tags: ["九龍區", "超大空間", "九龍東地標"], desc: "東九龍盡頭的開闊空間，路闊車少，日夜皆宜。", keyword: "啟德郵輪碼頭公園", lat: 22.3052, lon: 114.2144 },
-        { name: "西九文化區博物館道", icon: "🏛️", tags: ["九龍區", "現代建築", "M+博物館"], desc: "M+博物館旁，充滿現代建築線條的打卡熱點。", keyword: "博物館道", lat: 22.3015, lon: 114.1596 },
-        { name: "郵輪碼頭旅遊巴停車場", icon: "🚌", tags: ["九龍區", "空間廣闊", "車友聚腳"], desc: "啟德碼頭旁的巨型停泊位，常有車友聚會。", keyword: "啟德郵輪碼頭", lat: 22.3056, lon: 114.2127 },
-        { name: "宏展街咪錶停車場", icon: "🅿️", tags: ["九龍區", "九龍灣", "工廈風"], desc: "九龍灣隱蔽咪錶位，帶點工業風的拍攝好地方。", keyword: "九龍灣宏展街", lat: 22.3245, lon: 114.2045 },
-        { name: "飛鵝山/九龍峰", icon: "⛰️", tags: ["九龍區", "九龍全景", "跑山勝地"], desc: "九龍半島最高視角，挑戰技術與飽覽夜景的首選。", keyword: "飛鵝山", lat: 22.3436, lon: 114.2223 },
-        { name: "海輝道海濱花園", icon: "🌊", tags: ["九龍區", "奧運站海旁", "寧靜海景"], desc: "大角咀海濱，望向昂船洲大橋的寧靜休憩處。", keyword: "海輝道海濱花園", lat: 22.3175, lon: 114.1534 },
+        { name: "啟德郵輪碼頭公園", icon: "🛳️", tags: ["九龍區", "超大空間", "九龍東地標"], desc: "東九龍盡頭的開闊空間，路闊車少，日夜皆宜。", url: "https://surl.amap.com/1NK5nqSM514" },
+        { name: "郵輪碼頭旅遊巴停車場", icon: "🚌", tags: ["九龍區", "空間廣闊", "車友聚腳"], desc: "啟德碼頭旁的巨型停泊位，常有車友聚會。", url: "https://surl.amap.com/3IFNaSu1zfkI" },
+        { name: "宏展街咪錶停車場", icon: "🅿️", tags: ["九龍區", "九龍灣", "工廈風"], desc: "九龍灣隱蔽咪錶位，帶點工業風的拍攝好地方。", url: "https://surl.amap.com/30FoQ0C1rep9" },
+        { name: "飛鵝山/九龍峰", icon: "⛰️", tags: ["九龍區", "九龍全景", "跑山勝地"], desc: "九龍半島最高視角，挑戰技術與飽覽夜景的首選。", url: "https://surl.amap.com/c4DPo02h556" },
+        { name: "海輝道海濱花園", icon: "🌊", tags: ["九龍區", "奧運站海旁", "寧靜海景"], desc: "大角咀海濱，望向昂船洲大橋的寧靜休憩處。", url: "https://surl.amap.com/3Atlon89dZa" },
 
         // 新界區
-        { name: "香港黃金海岸", icon: "🏖️", tags: ["新界區", "渡假風情", "屯門南"], desc: "充滿地中海渡假風情的海岸線與遊艇會。", keyword: "香港黃金海岸", lat: 22.3725, lon: 113.9897 },
-        { name: "葵涌八號貨櫃碼頭", icon: "🏗️", tags: ["新界區", "工業風夜景", "極具氣勢"], desc: "昂船洲大橋下，金屬感與重工業燈光極具風格。", keyword: "八號貨櫃碼頭", lat: 22.3276, lon: 114.1232 },
-        { name: "牛潭尾食水主配水庫", icon: "💧", tags: ["新界區", "隱世草地", "打卡秘境"], desc: "元朗區的隱藏打卡點，擁有大片遼闊草地。", keyword: "牛潭尾濾水廠", lat: 22.4788, lon: 114.0543 },
-        { name: "大帽山郊野公園", icon: "☁️", tags: ["新界區", "全港最高", "多霧注意"], desc: "香港最高峰路段，荃錦公路多彎，可俯瞰全港。", keyword: "大帽山郊野公園", lat: 22.4116, lon: 114.1075 },
-        { name: "青龍頭段咪錶停車場", icon: "🌅", tags: ["新界區", "青山公路", "汀九橋景"], desc: "青公遊車河必停點，可遠眺青馬及汀九橋。", keyword: "青龍頭", lat: 22.3619, lon: 114.0458 },
-        { name: "青嶼幹線觀景台", icon: "🌉", tags: ["新界區", "雙橋美景", "宏偉建築"], desc: "一次過飽覽青馬大橋及汀九橋壯麗景觀。", keyword: "青嶼幹線觀景台", lat: 22.3582, lon: 114.0768 },
-        { name: "汀九停車場", icon: "🌉", tags: ["新界區", "橋底打卡", "近距離震撼"], desc: "於汀九橋底仰望巨大橋墩，極具視覺衝擊力。", keyword: "汀九村", lat: 22.3644, lon: 114.0746 },
-        { name: "屯赤浩和街", icon: "🌴", tags: ["新界區", "日落海旁", "港版邁亞密"], desc: "無敵海景加棕櫚樹大道，車友熱門打卡勝地。", keyword: "浩和街", lat: 22.3813, lon: 113.9234 },
-        { name: "清水灣第二灘咪錶停車位", icon: "🏖️", tags: ["新界區", "星空海灘", "山路駕駛"], desc: "清水灣道起伏多彎，到達後可享受寧靜海灘。", keyword: "清水灣第二灣泳灘", lat: 22.3031, lon: 114.2882 },
-        { name: "西貢海鮮街", icon: "🦞", tags: ["新界區", "美食遊車河", "假日熱鬧"], desc: "入西貢遊車河必到之處，吹海風食海鮮。", keyword: "西貢海鮮街", lat: 22.3815, lon: 114.2731 },
-        { name: "大尾篤咪錶泊車位", icon: "🚲", tags: ["新界區", "水壩靚景", "吐露港"], desc: "水壩兩旁盡是海景，駕車兜風極具悠閒感。", keyword: "大美督", lat: 22.4727, lon: 114.2346 }
+        { name: "香港黃金海岸", icon: "🏖️", tags: ["新界區", "渡假風情", "屯門南"], desc: "充滿地中海渡假風情的海岸線與遊艇會。", url: "https://surl.amap.com/jWS40GJ0PT" },
+        { name: "葵涌八號貨櫃碼頭", icon: "🏗️", tags: ["新界區", "工業風夜景", "極具氣勢"], desc: "昂船洲大橋下，金屬感與重工業燈光極具風格。", url: "https://surl.amap.com/iLA7vTI1i86A" },
+        { name: "大帽山郊野公園", icon: "☁️", tags: ["新界區", "全港最高", "多霧注意"], desc: "香港最高峰路段，荃錦公路多彎，可俯瞰全港。", url: "https://surl.amap.com/3BH4BoeBg4L" },
+        { name: "青龍頭段咪錶停車場", icon: "🌅", tags: ["新界區", "青山公路", "汀九橋景"], desc: "青公遊車河必停點，可遠眺青馬及汀九橋。", url: "https://surl.amap.com/48F9vyy1jeJN" },
+        { name: "青嶼幹線觀景台", icon: "🌉", tags: ["新界區", "雙橋美景", "宏偉建築"], desc: "一次過飽覽青馬大橋及汀九橋壯麗景觀。", url: "https://surl.amap.com/1GZEFsGp5aR" },
+        { name: "汀九停車場", icon: "🌉", tags: ["新界區", "橋底打卡", "近距離震撼"], desc: "於汀九橋底仰望巨大橋墩，極具視覺衝擊力。", url: "https://surl.amap.com/4uKUu9s1afGv" },
+        { name: "屯赤浩和街", icon: "🌴", tags: ["新界區", "日落海旁", "港版邁亞密"], desc: "無敵海景加棕櫚樹大道，車友熱門打卡勝地。", url: "https://surl.amap.com/1c0s0FwLdhw" },
+        { name: "清水灣第二灘咪錶停車位", icon: "🏖️", tags: ["新界區", "星空海灘", "山路駕駛"], desc: "清水灣道起伏多彎，到達後可享受寧靜海灘。", url: "https://surl.amap.com/c6AqtBw128fd" },
+        { name: "西貢海鮮街", icon: "🦞", tags: ["新界區", "美食遊車河", "假日熱鬧"], desc: "入西貢遊車河必到之處，吹海風食海鮮。", url: "https://surl.amap.com/4fkjsWuY09r" },
+        { name: "大尾篤咪錶泊車位", icon: "🚲", tags: ["新界區", "水壩靚景", "吐露港"], desc: "水壩兩旁盡是海景，駕車兜風極具悠閒感。", url: "https://surl.amap.com/4kTbLkSS4Hv" }
     ];
 
     let history = [];
@@ -261,23 +258,9 @@
                 tagsEl.innerHTML += `<span class="tag">${tag}</span>`;
             });
 
-            // 核心修改：改為直接規劃路線模式 (Path/Route)，並加入精確的經緯度 (lat, lon)
-            const isIOS = /Mac|iPad|iPhone|iPod/.test(navigator.userAgent);
-            const isAndroid = /Android/.test(navigator.userAgent);
-            const keyword = encodeURIComponent(dest.keyword);
-            
-            // 預設為網頁版路線規劃
-            let appUrl = `https://uri.amap.com/navigation?to=${dest.lon},${dest.lat},${keyword}&mode=car&policy=1`; 
-
-            if (isIOS) {
-                // iOS 專屬：直接跳轉路線規劃 (t=0 為駕車模式, dev=1 代表使用標準 GPS)
-                appUrl = `iosamap://path?sourceApplication=HKDriveBox&dname=${keyword}&dlat=${dest.lat}&dlon=${dest.lon}&t=0&dev=1`;
-            } else if (isAndroid) {
-                // Android 專屬：直接跳轉路線規劃
-                appUrl = `androidamap://route?sourceApplication=HKDriveBox&dname=${keyword}&dlat=${dest.lat}&dlon=${dest.lon}&t=0&dev=1`;
-            }
-
-            navBtn.href = appUrl;
+            // 核心修改：直接塞入高德官方的短連結 (surl.amap.com)
+            // 點擊後會自動呼叫手機系統打開對應的 App，並且完美顯示大頭針位置
+            navBtn.href = dest.url;
             navBtn.style.display = "inline-block";
             
             if (!history.includes(dest.name)) {
