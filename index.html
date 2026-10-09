@@ -175,7 +175,7 @@
 <div class="container">
     <div class="header">
         <h2>🚗 香港車友出車盲盒</h2>
-        <p>20個免禁區勝地，直開高德地圖 App</p>
+        <p>23個精選遊車河勝地，直開高德地圖 App</p>
     </div>
 
     <div class="map-card" id="mapCard">
@@ -200,28 +200,36 @@
 </div>
 
 <script>
-    // 20個香港經典免禁區車友出車景點資料庫
+    // 23個精選 LTE Auto 推薦地點
     const destinations = [
-        { name: "石澳道 (Shek O)", icon: "🌊", tags: ["多彎過癮", "海景", "深夜一流"], desc: "港島經典駕駛聖地，連續彎道極具駕駛樂趣。", keyword: "石澳道" },
-        { name: "大帽山道 (Tai Mo Shan)", icon: "☁️", tags: ["全港最高", "睇夜景", "多霧注意"], desc: "香港最高峰路段，荃錦公路多彎，可俯瞰全港夜景。", keyword: "大帽山道" },
-        { name: "屯門赤鱲角隧道", icon: "⚡", tags: ["高速直路", "隧道音浪"], desc: "香港最長海底隧道之一，享受流暢高速與排氣管聲浪。", keyword: "屯門赤鱲角隧道" },
-        { name: "鹿頸 / 汀角路", icon: "🌅", tags: ["鄉郊慢活", "海邊靚景"], desc: "由大埔經汀角路入鹿頸，沿途風景優美，路面平緩。", keyword: "鹿頸" },
-        { name: "清水灣郊野公園", icon: "🌙", tags: ["觀星", "多山路"], desc: "清水灣道起伏多彎，郊野公園一帶視野開闊適合吹風。", keyword: "清水灣郊野公園" },
-        { name: "欣澳 / 迪士尼廊", icon: "✈️", tags: ["海邊直路", "睇飛機"], desc: "欣澳海旁道路開揚，可望青馬大橋，常有航機掠過。", keyword: "欣澳" },
-        { name: "山頂道 / 寶雲道", icon: "🏙️", tags: ["極級夜景", "挑戰技術"], desc: "由中環上山頂，多急彎斜路，俯瞰維港雙岸夜景。", keyword: "山頂道" },
-        { name: "西貢萬宜水庫東壩", icon: "⛵", tags: ["地質公園", "山路漫長"], desc: "穿過西貢入萬宜路，景色壯麗，地質公園代表景點。", keyword: "萬宜水庫東壩" },
-        { name: "龍鼓灘海濱", icon: "🌇", tags: ["無敵日落", "工業風"], desc: "觀賞壯麗日落與貨櫃碼頭夜景的好去處。", keyword: "龍鼓灘" },
-        { name: "機場南路觀景山", icon: "✈️", tags: ["仰望飛機", "平直路段"], desc: "近距離感受航機從頭頂掠過的震撼。", keyword: "觀景山" },
-        { name: "大美督水壩", icon: "🌊", tags: ["假日吹風", "海景漫步"], desc: "水壩兩旁盡是海景，駕車兜風極具悠閒感。", keyword: "大美督" },
-        { name: "科學園白石角", icon: "💡", tags: ["吐露港旁", "路面平坦"], desc: "吐露港旁的現代化園區路段，深夜環境舒適。", keyword: "香港科學園" },
-        { name: "赤柱美利樓", icon: "🏛️", tags: ["南區海景", "異國風情"], desc: "經淺水灣道落赤柱，沿途山海交織景色宜人。", keyword: "赤柱廣場" },
-        { name: "荃錦公路川龍", icon: "🍵", tags: ["跑山勝地", "樹影林蔭"], desc: "香港車友練車與深夜跑山的經典山路。", keyword: "川龍村" },
-        { name: "元朗南生圍", icon: "🌾", tags: ["鄉郊濕地", "寫意放空"], desc: "充滿自然生態與鄉郊風味的特色道路。", keyword: "南生圍" },
-        { name: "烏溪沙馬鞍山", icon: "🌙", tags: ["海岸線", "寧靜舒適"], desc: "望向吐露港對岸的海岸線，夜晚車流較少。", keyword: "烏溪沙" },
-        { name: "深井青山公路", icon: "🍖", tags: ["海旁夜駕", "掃街勝地"], desc: "一邊吹住海風一邊享受深井燒鵝美食的好去處。", keyword: "深井村" },
-        { name: "飛鵝山道觀景台", icon: "⛰️", tags: ["九龍全景", "挑戰技術"], desc: "俯瞰九龍半島與維港夜景的絕佳山路高點。", keyword: "飛鵝山觀景台" },
-        { name: "屯門浩和街", icon: "🌴", tags: ["日落海旁", "打卡勝地"], desc: "有香港「小加州」之稱嘅無敵海景棕櫚樹大道，車友打卡必去。", keyword: "浩和街" },
-        { name: "8號貨櫃碼頭 (昂船洲)", icon: "🏗️", tags: ["工業風夜景", "極具氣勢"], desc: "昂船洲大橋下與貨櫃碼頭交界，金屬感同燈光極具風格。", keyword: "昂船洲八號貨櫃碼頭" }
+        // 港島區
+        { name: "天星碼頭多層停車場", icon: "🅿️", tags: ["港島區", "維港海景", "經典打卡"], desc: "中環經典多層停車場，背景係無敵維港海景及摩天輪。", keyword: "中環天星碼頭多層停車場" },
+        { name: "舊總督山頂別墅守衛室", icon: "🏛️", tags: ["港島區", "英倫風", "歷史古蹟"], desc: "山頂充滿古典英倫風味的守衛室，打卡一流。", keyword: "舊總督山頂別墅守衛室" },
+        { name: "司徒拔道觀景臺", icon: "🌃", tags: ["港島區", "極級夜景", "半山"], desc: "飽覽跑馬地及維港壯麗夜景的半山觀景勝地。", keyword: "司徒拔道觀景臺" },
+        { name: "白加道", icon: "⛰️", tags: ["港島區", "山頂纜車", "富豪地段"], desc: "可以捕捉山頂纜車擦身而過的獨特視角。", keyword: "白加道" },
+
+        // 九龍區
+        { name: "海運大廈停車場", icon: "🚢", tags: ["九龍區", "頂層靚景", "海景日落"], desc: "尖沙咀海港城頂層，盡覽無遮擋維多利亞港日落。", keyword: "海運大廈露天停車場" },
+        { name: "西九文化區藝術公園", icon: "🎨", tags: ["九龍區", "文青打卡", "大草地"], desc: "文化氣息濃厚，海濱長廊與大草地旁吹風散步。", keyword: "西九文化區藝術公園" },
+        { name: "啟德郵輪碼頭公園", icon: "🛳️", tags: ["九龍區", "超大空間", "九龍東地標"], desc: "東九龍盡頭的開闊空間，路闊車少，日夜皆宜。", keyword: "啟德郵輪碼頭公園" },
+        { name: "西九文化區博物館道", icon: "🏛️", tags: ["九龍區", "現代建築", "M+博物館"], desc: "M+博物館旁，充滿現代建築線條的打卡熱點。", keyword: "博物館道" },
+        { name: "郵輪碼頭旅遊巴停車場", icon: "🚌", tags: ["九龍區", "空間廣闊", "車友聚腳"], desc: "啟德碼頭旁的巨型停泊位，常有車友聚會。", keyword: "啟德郵輪碼頭" },
+        { name: "宏展街咪錶停車場", icon: "🅿️", tags: ["九龍區", "九龍灣", "工廈風"], desc: "九龍灣隱蔽咪錶位，帶點工業風的拍攝好地方。", keyword: "九龍灣宏展街" },
+        { name: "飛鵝山/九龍峰", icon: "⛰️", tags: ["九龍區", "九龍全景", "跑山勝地"], desc: "九龍半島最高視角，挑戰技術與飽覽夜景的首選。", keyword: "飛鵝山" },
+        { name: "海輝道海濱花園", icon: "🌊", tags: ["九龍區", "奧運站海旁", "寧靜海景"], desc: "大角咀海濱，望向昂船洲大橋的寧靜休憩處。", keyword: "海輝道海濱花園" },
+
+        // 新界區
+        { name: "香港黃金海岸", icon: "🏖️", tags: ["新界區", "渡假風情", "屯門南"], desc: "充滿地中海渡假風情的海岸線與遊艇會。", keyword: "香港黃金海岸" },
+        { name: "葵涌八號貨櫃碼頭", icon: "🏗️", tags: ["新界區", "工業風夜景", "極具氣勢"], desc: "昂船洲大橋下，金屬感與重工業燈光極具風格。", keyword: "八號貨櫃碼頭" },
+        { name: "牛潭尾食水主配水庫", icon: "💧", tags: ["新界區", "隱世草地", "打卡秘境"], desc: "元朗區的隱藏打卡點，擁有大片遼闊草地。", keyword: "牛潭尾濾水廠" },
+        { name: "大帽山郊野公園", icon: "☁️", tags: ["新界區", "全港最高", "多霧注意"], desc: "香港最高峰路段，荃錦公路多彎，可俯瞰全港。", keyword: "大帽山郊野公園" },
+        { name: "青龍頭段咪錶停車場", icon: "🌅", tags: ["新界區", "青山公路", "汀九橋景"], desc: "青公遊車河必停點，可遠眺青馬及汀九橋。", keyword: "青龍頭" },
+        { name: "青嶼幹線觀景台", icon: "🌉", tags: ["新界區", "雙橋美景", "宏偉建築"], desc: "一次過飽覽青馬大橋及汀九橋壯麗景觀。", keyword: "青嶼幹線觀景台" },
+        { name: "汀九停車場", icon: "🌉", tags: ["新界區", "橋底打卡", "近距離震撼"], desc: "於汀九橋底仰望巨大橋墩，極具視覺衝擊力。", keyword: "汀九村" },
+        { name: "屯赤浩和街", icon: "🌴", tags: ["新界區", "日落海旁", "港版邁亞密"], desc: "無敵海景加棕櫚樹大道，車友熱門打卡勝地。", keyword: "浩和街" },
+        { name: "清水灣第二灘咪錶停車位", icon: "🏖️", tags: ["新界區", "星空海灘", "山路駕駛"], desc: "清水灣道起伏多彎，到達後可享受寧靜海灘。", keyword: "清水灣第二灣泳灘" },
+        { name: "西貢海鮮街", icon: "🦞", tags: ["新界區", "美食遊車河", "假日熱鬧"], desc: "入西貢遊車河必到之處，吹海風食海鮮。", keyword: "西貢海鮮街" },
+        { name: "大尾篤咪錶泊車位", icon: "🚲", tags: ["新界區", "水壩靚景", "吐露港"], desc: "水壩兩旁盡是海景，駕車兜風極具悠閒感。", keyword: "大美督" }
     ];
 
     let history = [];
@@ -253,12 +261,23 @@
                 tagsEl.innerHTML += `<span class="tag">${tag}</span>`;
             });
 
-            // 核心修改：使用 iOS 高德原生 URL Scheme (iosamap://)
-            // path 代表路線規劃，dname 代表目的地，t=0 代表駕車模式
-            navBtn.href = `iosamap://path?sourceApplication=HKDriveBox&dname=${encodeURIComponent(dest.keyword)}&t=0`;
-            navBtn.style.display = "inline-block";
+            // 核心修改：智能識別 iOS 與 Android，使用無痛 POI 搜尋模式
+            const isIOS = /Mac|iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            const keyword = encodeURIComponent(dest.keyword);
+            
+            let appUrl = `https://www.amap.com/search?query=${keyword}`; // 網頁版兜底
 
-            // 如果喺 Safari 㩒，佢會彈句「要在高德地圖中打開嗎？」，按打開就直接入 App！
+            if (isIOS) {
+                // iOS 高德地圖專用 POI 搜尋 Scheme
+                appUrl = `iosamap://poi?sourceApplication=HKDriveBox&name=${keyword}`;
+            } else if (isAndroid) {
+                // Android 高德地圖專用 POI 搜尋 Scheme
+                appUrl = `androidamap://poi?sourceApplication=HKDriveBox&keywords=${keyword}`;
+            }
+
+            navBtn.href = appUrl;
+            navBtn.style.display = "inline-block";
             
             if (!history.includes(dest.name)) {
                 history.unshift(dest.name);
